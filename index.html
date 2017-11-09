@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        .taskDone{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="container col-sm-8 col-offset-2">
+        <div id="taskApp">
+            <h1>TODO Task List App</h1>
+
+            <div class="panel panel-default">
+                <h2 class="text-center">Add New Task</h2>
+                <form v-on:submit.prevent="addTask" class="row">
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" v-model="nameInput">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="submit" class="btn btn-primary btn-block" value='add'>
+                    </div>
+                </form>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Check</td>
+                        <td>Description</td>
+                        <td>Delete</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="task in tasks">
+                        <td><input v-model="task.done" type="checkbox"></td>
+                        <td><span :class="{taskDone: task.done}">{{task.name}}</span></td>
+                        <td><button v-on:click="deleteTask(task)" class="btn btn-danger btn-block">delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
